@@ -228,50 +228,6 @@ public:
 		return ((float)t / CLOCKS_PER_SEC);
 	}
 
-	//float QuickSort() {
-	//	clock_t t;
-	//	t = clock();
-	//	if(Head != NULL)
-	//		RecursiveQuickSort(Head)
-
-
-
-
-	//	//t is number of ticks and clocks_per_sec is number of ticks per second
-	//	t = clock() - t;
-	//	return ((float)t / CLOCKS_PER_SEC);
-	//}
-
-	//Node<T>* RecursiveQuickSort(Node<T>* StartingPoint) {
-	//	Node<T>* partition = StartingPoint;
-	//	Node<T>* iterator = partition->GetNext();
-	//	while (iterator != NULL)
-	//	{
-	//		if (iterator->Getdata() > partition->Getdata()) {
-
-	//		}
-	//		else {
-	//			//swap the value next to the partition
-	//			T temp = iterator->Getdata();
-	//			iterator->SetData(partition->GetNext()->Getdata());
-	//			partition->GetNext()->Setdata(temp);
-
-	//			//then swap the partitionand it so it goes on the left of the partition
-	//			T temp = partition->Getdata();
-	//			partition->SetData(partition->GetNext()->Getdata());
-	//			partition->GetNext()->Setdata(temp);
-
-	//		}
-	//		iterator = iterator->GetNext();
-	//	}
-	//	if(iterator ->GetNext() != NULL)
-	//		RecursiveQuickSort(iterator->GetNext())
-	//	
-	//	if (iterator->GetPrevious() != NULL)
-	//		RecursiveQuickSort(iterator->GetPrevious())
-
-	//}
-
 	float ShellSort(){
 		clock_t t;
 		t = clock();
@@ -281,12 +237,16 @@ public:
 		Node<T>* iterator = Head;
 		Node<T>* comparer;
 	
-
+		//we swap far away values and decrease the gap then run an insertion sort
 		while (Gap > 1)
 		{
 			iterator = Head;
 			comparer = iterator;
+
+			//keep swapping untill the value at the end of the gap goes off the end of the list
 			while (comparer != NULL) {
+
+				//have to find the value to swap with
 				int count = 0;
 				comparer = iterator;
 				while (count < Gap) {
@@ -298,6 +258,7 @@ public:
 						break;
 					}
 				}
+				//swap the value if the value is greater
 				if (comparer != NULL) {
 					if (iterator->Getdata() > comparer->Getdata()) {
 						T temp = iterator->Getdata();
@@ -305,11 +266,14 @@ public:
 						comparer->SetData(temp);
 					}
 				}
+				
 				iterator = iterator->GetNext();
 			}
+			//once youve swaped decrease and repeat untill the gap is 1
 			Gap = floor(Gap / 2.2);
 		}
 
+		//once youve swapped alot the list is close to sorted so the insertion sort runs at high speed
 		InsertionSort();
 
 		//t is number of ticks and clocks_per_sec is number of ticks per second
