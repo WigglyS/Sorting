@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include <string>
 #include <iostream>
 #include <stdlib.h>
@@ -151,7 +150,7 @@ public:
 	//loops through all the nodes and displays their data
 	void Display() {
 		if (size > 100) {
-			cout << "Size : " << size << " is too bid to Display" << endl;
+			cout << "Size : " << size << " is too big to Display" << endl;
 			return;
 		}
 		Node<T>* temp = Head;
